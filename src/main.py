@@ -12,3 +12,9 @@ for path in paths:
 
     # TODO: tiap pv list, freq dipake buat training model
     #       4 freq -> 1 pv
+
+    # print
+    for i in range (len(pv_list)):
+        print('('+ str(freq[i*4]) + ' ' + str(freq[i*4+1]) + ' ' + str(freq[i*4+2]) + ' ' + str(freq[i*4]) + ') => ' + str(pv_list[i]))
+
+    break
