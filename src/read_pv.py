@@ -27,6 +27,14 @@ def getPvPaths():
         
     return path_list
 
+def makePvList(pv_path):
+    f = open(pv_path, 'r')
+    pv_list = [round(float(line.rstrip('\n'))) for line in f]
+    f.close()
+    
+    return pv_list
+
 if __name__ == "__main__":
     path_names = getPvPaths()
-    print(len(path_names))
+    pv_path = path_names[0] + '.pv'
+    print(makePvList(pv_path))
