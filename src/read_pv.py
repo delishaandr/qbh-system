@@ -23,7 +23,7 @@ def getPvPaths():
             
             for file in os.listdir(person_path):
                 if file.endswith('.pv'):
-                    path_list.append(os.path.join(person_path, file))
+                    path_list.append(os.path.join(person_path, file[:-3]))
         
     return path_list
 
