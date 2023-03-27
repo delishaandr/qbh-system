@@ -14,6 +14,6 @@ def detectPitch(audio_path):
         if (confidence[i] < threshold): 
             frequency[i] = 0
 
-    frequency = frequency[:-1]
+    frequency = frequency[1:]
 
     return frequency
