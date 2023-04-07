@@ -6,7 +6,7 @@ from read_pv import getPvPaths
 
 def detectPitch(audio_path):
     sf, audio = wavfile.read(audio_path)
-    time, frequency, confidence, activation = crepe.predict(audio, sf, viterbi=True, step_size=8)
+    time, frequency, confidence, activation = crepe.predict(audio, sf, viterbi=True, step_size=32)
 
     # if confidence is below threshold, frequency becomes 0
     threshold = 0.6 # can be changed for better accuracy
