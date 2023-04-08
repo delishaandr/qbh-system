@@ -2,7 +2,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.io import wavfile
 import crepe
-from read_pv import getPvPaths
 
 def detectPitch(audio_path):
     sf, audio = wavfile.read(audio_path)
