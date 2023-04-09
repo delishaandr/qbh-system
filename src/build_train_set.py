@@ -2,7 +2,7 @@ from audio_processing import detectPitch
 import numpy as np
 import os
 
-def buildTrainSet():
+def buildTrainSet(): # yang dipanggil ini aja
     paths = getPvPaths()
 
     all_pv = [] # 1107750 pitch vector, range 30 - 86
@@ -20,6 +20,8 @@ def buildTrainSet():
 
     all_pv = list(np.concatenate(all_pv).flat)
     all_freq = list(np.concatenate(all_freq).flat)
+
+    return all_pv, all_freq
 
     # TODO: split data set jadi 80% train, 10% test, 10% tuning
     #       liat distribusi pv dulu (matplotlib)
@@ -67,3 +69,9 @@ def cleanData(freq_list, pv_list):
             new_pv.append(pv_list[i])
 
     return new_pv
+
+if __name__ == "__main__":
+    pv, freq = buildTrainSet()
+
+    print(pv)
+    print(freq)
