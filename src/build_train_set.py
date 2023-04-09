@@ -5,8 +5,8 @@ import os
 def buildTrainSet(): # yang dipanggil ini aja
     paths = getPvPaths()
 
-    all_pv = [] # 1107750 pitch vector, range 30 - 86
     all_freq = []
+    all_pv = [] # 1107750 pitch vector, range 30 - 86
 
     for path in paths:
         audio_path = path + '.wav'
@@ -15,13 +15,13 @@ def buildTrainSet(): # yang dipanggil ini aja
         freq_list = detectPitch(audio_path)
         pv_list = cleanData(freq_list, makePvList(pv_path))
 
-        all_pv.append(pv_list)
         all_freq.append(freq_list)
+        all_pv.append(pv_list)
 
-    all_pv = list(np.concatenate(all_pv).flat)
     all_freq = list(np.concatenate(all_freq).flat)
+    all_pv = list(np.concatenate(all_pv).flat)
 
-    return all_pv, all_freq
+    return all_freq, all_pv
 
     # TODO: split data set jadi 80% train, 10% test, 10% tuning
     #       liat distribusi pv dulu (matplotlib)
