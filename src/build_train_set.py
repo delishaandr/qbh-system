@@ -23,9 +23,6 @@ def buildTrainSet(): # yang dipanggil ini aja
 
     return all_freq, all_pv
 
-    # TODO: split data set jadi 80% train, 10% test, 10% tuning
-    #       liat distribusi pv dulu (matplotlib)
-
 # Return list of paths to .pv files
 def getPvPaths():
     cur_path = os.path.abspath(os.path.dirname(__file__))
@@ -70,8 +67,14 @@ def cleanData(freq_list, pv_list):
 
     return new_pv
 
-if __name__ == "__main__":
-    pv, freq = buildTrainSet()
-
-    print(pv)
-    print(freq)
+def makePvBinary(pvs):
+    all_pv = []
+    for pv in pvs:
+        bin_pv = [0 for i in range (58)]
+        if (pv == 0):
+            bin_pv[0] = 1
+        else:
+            bin_pv[pv-29] = 1
+        all_pv.append(bin_pv)
+    
+    return np.array(all_pv)
