@@ -6,7 +6,7 @@ def buildTrainSet(): # yang dipanggil ini aja
     paths = getPvPaths()
 
     all_freq = []
-    all_pv = [] # 1107750 pitch vector, range 30 - 86
+    all_pv = [] # range 30 - 86
 
     for path in paths:
         audio_path = path + '.wav'
@@ -18,8 +18,8 @@ def buildTrainSet(): # yang dipanggil ini aja
         all_freq.append(freq_list)
         all_pv.append(pv_list)
 
-    all_freq = list(np.concatenate(all_freq).flat)
-    all_pv = list(np.concatenate(all_pv).flat)
+        all_freq = all_freq.reshape((4431, 250, 1))
+        all_pv = makePvBinary(all_pv)
 
     return all_freq, all_pv
 
@@ -70,11 +70,27 @@ def cleanData(freq_list, pv_list):
 def makePvBinary(pvs):
     all_pv = []
     for pv in pvs:
-        bin_pv = [0 for i in range (58)]
-        if (pv == 0):
-            bin_pv[0] = 1
-        else:
-            bin_pv[pv-29] = 1
-        all_pv.append(bin_pv)
+        new_pv = []
+        for p in pv:
+            bin_pv = [0 for i in range (58)]
+            if (p == 0):
+                bin_pv[0] = 1
+            else:
+                bin_pv[p-29] = 1
+            new_pv.append(bin_pv)
+        all_pv.append(new_pv)
     
     return np.array(all_pv)
+
+def returnPvLabel(bin_pv):
+    max_idx = np.argmax(bin_pv)
+
+    if (max_idx == 0):
+        return 0
+    else:
+        return max_idx + 29
+
+if __name__ == '__main__':
+    pv = [[0,35,64],[32,43,65]]
+    npv = makePvBinary(pv)
+    print(npv)
