@@ -8,3 +8,6 @@ scipy
 IPython
 statsmodels
 crepe
+pypianoroll
+libfmp
+sklearn
