@@ -5,10 +5,9 @@ import os
 
 def buildHummingSet(b_type = 'load'):
     cur_path = os.path.abspath(os.path.dirname(__file__))
+    train_paths, test_paths, tune_paths = splitTrainingSet()
 
     if (b_type == 'build'):
-        train_paths, test_paths, tune_paths = splitTrainingSet()
-
         train_freqs, train_pvs = loadAudioPv(train_paths)
         test_freqs, test_pvs = loadAudioPv(test_paths)
         tune_freqs, tune_pvs = loadAudioPv(tune_paths)
@@ -30,7 +29,11 @@ def buildHummingSet(b_type = 'load'):
     tune_freqs = all_freqs[4034:]
     tune_pvs = all_pvs[4034:]
 
-    return train_freqs, train_pvs, test_freqs, test_pvs, tune_freqs, tune_pvs
+    train_labels = [int(x[-5:])-1 for x in train_paths]
+    test_labels = [int(x[-5:])-1 for x in test_paths]
+    tune_labels = [int(x[-5:])-1 for x in tune_paths]
+
+    return train_freqs, train_pvs, train_labels, test_freqs, test_pvs, test_labels, tune_freqs, tune_pvs, tune_labels
 
 def loadAudioPv(paths):
     freqs = []
@@ -148,15 +151,14 @@ def getHummingPaths():
     return path_list
 
 if __name__ == '__main__':
-    # tr, te, tu = splitTrainingSet()
-
-    # cur_path = os.path.abspath(os.path.dirname(__file__))
-    # hum_path = os.path.join(cur_path, '../ext/test')
-    # np.save(hum_path, te)
+    tr, te, tu = splitTrainingSet()
+    print(tr[0][-5:])
+    print([int(x[-5:])-1 for x in tr])
 
     # tr_f, tr_p, te_f, te_p, tu_f, tu_p = buildHummingSet()
     # print(len(tr_f), len(te_f), len(tu_f))
 
+    # cur_path = os.path.abspath(os.path.dirname(__file__))
     # r_freq = np.load(os.path.join(cur_path, '../ext/train_pvs.npy'))
     # e_freq = np.load(os.path.join(cur_path, '../ext/test_pvs.npy'))
     # u_freq = np.load(os.path.join(cur_path, '../ext/tune_pvs.npy'))
