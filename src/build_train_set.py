@@ -24,7 +24,7 @@ def makePvBin(pvs):
         for c in conv_pv:
             bin = [0 for i in range (13)]
             bin[c] = 1
-            bin_pv.append[bin]
+            bin_pv.append(bin)
         all_bin.append(bin_pv)
     
     return np.array(all_bin)
@@ -36,3 +36,9 @@ def convertPv(pv):
             conv_pv.append(0) # 0 -> silence
         else:
             conv_pv.append((pv[i] % 12 + 3) % 12 + 1) # 1 -> A, 2 -> A#, 3 -> B, ...
+    
+    return conv_pv
+
+if __name__ == '__main__':
+    tr_f, tr_p, tr_l, te_f, te_p, te_l, tu_f, tu_p, tu_l = buildHummingSet()
+    print(makePvBin(tr_p).shape)
