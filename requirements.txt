@@ -11,3 +11,5 @@ crepe
 pypianoroll
 libfmp
 sklearn
+keras
+keras-tuner
