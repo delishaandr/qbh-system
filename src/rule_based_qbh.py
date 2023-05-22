@@ -10,10 +10,10 @@ def ruleBasedQBH(all_freqs):
 def getFreqLabels(freqs):
     label = []
     for freq in freqs:
-        if (freq == 0):
+        if (freq == 0): # ignore if silence
             label.append(0)
         else:
             m = round(12 * math.log(freq / 440, 2) + 69)
-            label.append((m % 12 + 3) % 12)
+            label.append((m % 12 + 3) % 12 + 1)
     
     return label
