@@ -152,8 +152,8 @@ def getHummingPaths():
 
 if __name__ == '__main__':
     tr, te, tu = splitTrainingSet()
-    print(tr[0][-5:])
-    print([int(x[-5:])-1 for x in tr])
+    print(te[2])
+    # print([int(x[-5:])-1 for x in tr])
 
     # tr_f, tr_p, te_f, te_p, tu_f, tu_p = buildHummingSet()
     # print(len(tr_f), len(te_f), len(tu_f))

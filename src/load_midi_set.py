@@ -1,6 +1,7 @@
 import pypianoroll
 import numpy as np
 import os
+from urllib.parse import unquote
 
 def importMidiFiles():
     midi_paths = getMidiPaths()
@@ -13,7 +14,9 @@ def importMidiFiles():
 
         mid_arr.append(arr)
 
-    return mid_arr
+    song_list = getSongTitles()
+
+    return mid_arr, song_list
 
 def getMidiPaths():
     cur_path = os.path.abspath(os.path.dirname(__file__))
@@ -34,6 +37,49 @@ def convertMidi(arr):
 
     return n_arr
 
+def getSongTitles():
+    cur_path = os.path.abspath(os.path.dirname(__file__))
+    mid_path = os.path.join(cur_path, '../dataset/midi')
+
+    midi_names = os.listdir(mid_path)
+    fi = midi_names[-1]
+    path = os.path.join(mid_path, fi)
+    
+    song_list = []
+    with open(path, 'r') as f:
+        i = 1
+        for line in f:
+            split = line[6:].split('\t')
+            if (split[0] != '-'):
+                song_list.append(split[0])
+            else:
+                song_list.append('Song ' + str(i))
+            i += 1
+            
+    return song_list
+
+def convertUnicode(uni):
+    # unquoted = unquote(uni)
+    # print(unquoted.decode('utf-8'))
+    # format(ord("c"), "x")
+    hex = [ format(ord(item), "x") for item in uni]
+    # hex = [ item.encode('utf-8').hex() for item in uni ]
+    # print(str(uni.decode('gbk')))
+    print(hex)
+    stri = ''
+    h = ''
+    for i in range(len(hex)):
+        h += hex[i]
+        if (i % 2 != 0):
+            stri += '\\u' + h
+            h = ''
+    print(stri)
+    
+    print(stri.encode('ascii').decode('unicode-escape'))
+
+
+
 if __name__ == '__main__':
-    mid_list = importMidiFiles()
-    print(mid_list[1])
+    print(getSongTitles())
+    # convertUnicode('´ÓºÜ¾ÃÒÔÇ°¿ªÊ¼')
+    # c = u'%b4%d3%ba%dc%be%c3%d2%d4%c7%b0%bf%aa%ca%bc'
