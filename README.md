@@ -1,8 +1,8 @@
 # How to Run
 
 Before running:
-1. Download Robert Jang's QBSH corpus from MIREX or from [this link](https://music-ir.org/evaluation/MIREX/data/qbsh/MIR-QBSH-corpus.tar.gz)
-2. Copy the `waveFile` folder to the project and rename the folder to `train`
+1. Download `dataset` ZIP file from [this link](https://drive.google.com/drive/folders/1xgaRW9B1DaqNvFNF_ANJjnWxvq19pqZl?usp=drive_link)
+2. Unzip file in project folder
 3. Make a virtual environment 
    ```
    python -m venv env
