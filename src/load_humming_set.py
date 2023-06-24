@@ -141,8 +141,6 @@ def getHummingPaths():
 
         for person in persons:
             person_path = os.path.join(year_path, person)
-
-            print(len(os.listdir(person_path)) // 2)
             
             for file in os.listdir(person_path):
                 if file.endswith('.pv'):

@@ -46,15 +46,13 @@ def getSongTitles():
     path = os.path.join(mid_path, fi)
     
     song_list = []
-    with open(path, 'r') as f:
-        i = 1
+    with open(path, 'r', encoding="utf-8") as f:
         for line in f:
             split = line[6:].split('\t')
             if (split[0] != '-'):
                 song_list.append(split[0])
             else:
-                song_list.append('Song ' + str(i))
-            i += 1
+                song_list.append(split[1])
             
     return song_list
 
