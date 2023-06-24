@@ -56,27 +56,6 @@ def getSongTitles():
             
     return song_list
 
-def convertUnicode(uni):
-    # unquoted = unquote(uni)
-    # print(unquoted.decode('utf-8'))
-    # format(ord("c"), "x")
-    hex = [ format(ord(item), "x") for item in uni]
-    # hex = [ item.encode('utf-8').hex() for item in uni ]
-    # print(str(uni.decode('gbk')))
-    print(hex)
-    stri = ''
-    h = ''
-    for i in range(len(hex)):
-        h += hex[i]
-        if (i % 2 != 0):
-            stri += '\\u' + h
-            h = ''
-    print(stri)
-    
-    print(stri.encode('ascii').decode('unicode-escape'))
-
-
-
 if __name__ == '__main__':
     print(getSongTitles())
     # convertUnicode('´ÓºÜ¾ÃÒÔÇ°¿ªÊ¼')
